@@ -13,6 +13,7 @@ router.post('/', (req: Request, res: Response) => {
   getWeather(req.body.city)
   // Done: save city to search history
   saveCity(req.body.city)
+
 });
 
 // DOne: GET search history

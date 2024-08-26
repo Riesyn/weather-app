@@ -7,6 +7,13 @@ class City {
 }
 
 
+async addCity(city: string) {
+  const cities = await this.read();
+  const newCity = new City(cities.length.toString(), city);
+  cities.push(newCity);
+  await this.write(cities);
+}
+
 // TODO: Complete the HistoryService class
 class HistoryService {
   getCities() {
@@ -15,6 +22,10 @@ class HistoryService {
   private filePath = 'searchHistory.json';
 
   // Read method to read from the searchHistory.json file
+
+
+
+
   private async read(): Promise<City[]> {
     try {
       const data = await fs.readFile(this.filePath, 'utf-8');
@@ -39,7 +50,6 @@ class HistoryService {
   // * BONUS TODO: Define a removeCity method that removes a city from the searchHistory.json file
   // async removeCity(id: string) {}
 }
-
     // Write method to write to the searchHistory.json file
     private async write(cities: City[]): Promise < void> {
   await fs.writeFile(this.filePath, JSON.stringify(cities));
