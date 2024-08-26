@@ -12,9 +12,9 @@ const router = Router();
 router.post('/', (req: Request, _res: Response) => {////////////////////////////////////////////possible error 
 
   // Done: GET weather data from city name
-  WeatherService.getWeatherForCity(req.body.city)
+  WeatherService.getWeatherForCity(req.body.cityName)
   // Done: save city to search history
-  HistoryService.addCity(req.body.city)////////////////////////////////TODO
+  HistoryService.addCity(req.body.cityName)////////////////////////////////TODO
 
 });
 
