@@ -10,14 +10,14 @@ import WeatherService from '../../service/weatherService.js';
 router.post('/', (req: Request, res: Response) => {
 
   // Done: GET weather data from city name
-  getWeather(req.body.city)
+  WeatherService.getWeatherForCity(req.body.city)
   // Done: save city to search history
-  saveCity(req.body.city)
+  HistoryService.addCity(req.body.city)////////////////////////////////TODO
 
 });
 
 // DOne: GET search history
-router.get('/history', async (req: Request, res: Response) => {
+router.get('/history', async (_req: Request, res: Response) => {//////////////////////possible error
   try {
     const history = await HistoryService.getCities();
     res.status(200).json(history);
@@ -30,7 +30,7 @@ router.get('/history', async (req: Request, res: Response) => {
 // * BONUS TODO: DELETE city from search history
 router.delete('/history/:id', async (req: Request, res: Response) => {
   try {
-    await HistoryService.removeCity(req.params.id);
+    await HistoryService.removeCity(req.params.id); //TODO add to histtoyservice
     res.status(200).json({ message: 'City removed from search history', });
   } catch (error) {
     res.status(500).json({ error: 'Could not remove city from search history', });

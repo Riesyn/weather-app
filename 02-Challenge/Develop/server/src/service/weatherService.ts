@@ -7,7 +7,6 @@ interface Coordinates {
   lon: number;
   name: string;
   state: string;
-
 }
 
 
@@ -28,19 +27,18 @@ class Weather {
     this.humidity = humidity;
     this.windspeed = windspeed;
   }
-
 }
 
 // TODO: Complete the WeatherService class
 class WeatherService {
   // TODO: Define the baseURL, API key, and city name properties
-  private baseURL: string = BASE_URL;
-  private apiKey: string = API_KEY;
+  private baseURL: string = process.env.WEATHER_API_BASE_URL || '';
+  private apiKey: string = process.env.WEATHER_API_KEY || '';
   private cityName: string = '';
   // TODO: Create fetchLocationData method
   // private async fetchLocationData(query: string) {}
   private async fetchLocationData(query: string) {
-    const response: Coordinates await fetch(query).then((res) => res.json());
+    const response: Coordinates[] = await fetch(query).then((res) => res.json());
     return response[0];
   }
   // TODO: Create destructureLocationData method
@@ -98,6 +96,7 @@ class WeatherService {
         weatherData[i].main.humidity,
         weatherData[i].wind.speed
       );
+      forecastArray.push(forecast);
     }
     return forecastArray;
   }
