@@ -1,13 +1,15 @@
 import { Router, type Request, type Response } from 'express';
-const router = Router();
+
 
 import HistoryService from '../../service/historyService.js';
 
 import WeatherService from '../../service/weatherService.js';
 
+const router = Router();
+
 
 // Dne: POST Request with city name to retrieve weather data
-router.post('/', (req: Request, res: Response) => {
+router.post('/', (req: Request, _res: Response) => {////////////////////////////////////////////possible error 
 
   // Done: GET weather data from city name
   WeatherService.getWeatherForCity(req.body.city)
@@ -19,7 +21,7 @@ router.post('/', (req: Request, res: Response) => {
 // DOne: GET search history
 router.get('/history', async (_req: Request, res: Response) => {//////////////////////possible error
   try {
-    const history = await HistoryService.getCities();
+    const history = HistoryService.getCities();
     res.status(200).json(history);
   } catch (error) {
     res.status(500).json({ error: 'Could not get search history', });
